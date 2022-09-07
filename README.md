@@ -32,7 +32,7 @@ clone example: firebase hosting:clone livethree-landing-page:test1 livethree-lan
 
 firebase hosting:channel:deploy upgrade6 --only livethree-d1d85 --expires 1d
 
-firebase hosting:clone livethree-d1d85:upgrade5 livethree-d1d85:live
+firebase hosting:clone livethree-d1d85:test8 livethree-d1d85:live
 ------------
 firebase hosting:channel:deploy test7 --only livethree-d1d85 --expires 1d
 ------------

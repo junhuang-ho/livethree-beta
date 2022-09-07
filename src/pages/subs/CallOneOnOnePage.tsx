@@ -38,6 +38,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 import Tooltip from "@mui/material/Tooltip";
+import CircularProgress from '@mui/material/CircularProgress';
 import Card from "@mui/material/Card";
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -481,15 +482,25 @@ const CallOneOnOnePage = () => {
                 disableEscapeKeyDown
                 open={ !active && !!isConnected }
             >
-                <DialogTitle id="responsive-dialog-title" align="center">
-                    { "Starting money streaming video call." }
-                </DialogTitle>
-                <DialogTitle id="responsive-dialog-title" align="center">
-                    { "Please do not leave this page." }
-                </DialogTitle>
-                <DialogTitle id="responsive-dialog-title" align="center">
-                    { isCaller ? "If you are connected to an external wallet, please confirm the transaction to start the video call." : "Waiting caller to start money stream." }
-                </DialogTitle>
+                <Stack
+                    direction='column'
+                    alignItems='center'
+                    justifyContent='center'
+                >
+                    <DialogTitle id="responsive-dialog-title" align="center">
+                        { "Starting money streaming video call." }
+                    </DialogTitle>
+                    <CircularProgress size="33px" />
+                    <DialogTitle id="responsive-dialog-title" align="center">
+                        { "Please do not leave this page." }
+                    </DialogTitle>
+                    <DialogTitle id="responsive-dialog-title" align="center">
+                        { isCaller ?
+                            "If you are connected to an external wallet, please confirm the transaction to start the video call." :
+                            "Waiting caller to start money stream."
+                        }
+                    </DialogTitle>
+                </Stack>
             </Dialog>
         </Box >
     )

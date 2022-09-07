@@ -30,7 +30,7 @@ export const Debugger = () => {
     const [openNetwork, setOpenNetwork] = useState<boolean>(false)
     const [network, setNetwork] = useState<WEB3AUTH_CHAIN_CONFIG_TYPE>(CHAIN_NAME_DEFAULT)
 
-    const { getOperatorData, getNetFlowAdminTokenXTmp, getNetFlowTokenX, createFlow, tokenAllowance, refreshSFStates } = useSuperfluidGas()
+    const { getOperatorData, getNetFlowAdminTokenXTmp, getNetFlowTokenX, createFlow, tokenAllowance, refreshSFStates, getFlowData } = useSuperfluidGas()
     const { chainId, getUserInfo, setSelectedChain, setIsLoginReady } = useWeb3Auth()
 
     const [recipientAddress, setRecipientAddress] = useState<string>("")
@@ -151,6 +151,14 @@ export const Debugger = () => {
                             } }
                         >
                             getNetFlowTokenX
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={ async () => {
+                                console.log((await getFlowData("0xab9bbc59359e70EBdfAB5941bc8546E65BBe02da", "0xed9F34A7A6117b303F2aFB8E4b792088D79Aa8BC")).toString())
+                            } }
+                        >
+                            getFlow!!
                         </Button>
                         <Button
                             variant="contained"

@@ -125,6 +125,10 @@ export const CallProvider = ({ children }: { children: JSX.Element }) => {
         setHasRoom(asCallerData?.hasRoom)
     }, [asCallerData])
 
+    const [effectiveFlowRate, setEffectiveFlowRate] = useState<string>("0")
+    const [effectiveFlowDeposit, setEffectiveFlowDeposit] = useState<string>("0")
+    const [isCheckFlow, setIsCheckFlow] = useState<boolean>(false)
+
     const [isRingtoneEnabled, setIsRingtoneEnabled] = useState<boolean>(true)
     const [play, { stop }] = useSound(ringtone, { soundEnabled: isRingtoneEnabled });
     const [isRinging, setIsRinging] = useState<boolean>(false)
@@ -751,31 +755,42 @@ export const CallProvider = ({ children }: { children: JSX.Element }) => {
         setActiveCallMaxSeconds(safeSeconds.toString()) // set for caller
     }
 
+    const setActiveFlow = async () => {
+        console.warn("~~~ Checking active flow ~~~")
+        const flowInfo = await getFlowData(activeRoomData?.caller, activeRoomData?.callee)
+        const flowInfoAdmin = await getFlowData(activeRoomData?.caller, ADMIN_ADDRESS)
+
+        const flowRateEffective = flowInfo?.flowRate.add(flowInfoAdmin?.flowRate)
+        const flowDepositEffective = flowInfo?.deposit.add(flowInfoAdmin?.deposit)
+
+        const flowRate = flowRateEffective.toString()
+        const flowDeposit = flowDepositEffective.toString()
+
+        setEffectiveFlowRate(flowRate)
+        setEffectiveFlowDeposit(flowDeposit)
+    }
+
+    useInterval(() => {
+        setActiveFlow()
+    }, ((effectiveFlowRate === "0" || effectiveFlowDeposit === "0") && isCheckFlow && activeCallMaxSeconds === "0" && activeRoomData?.caller === localAddress) ? 2000 : null)
+
     useUpdateEffect(() => {
         const getInfo = async () => {
-            console.log("isCreatingFlow:", isCreatingFlow)
-            const flowInfo = await getFlowData(activeRoomData?.caller, activeRoomData?.callee)
-            const flowInfoAdmin = await getFlowData(activeRoomData?.caller, ADMIN_ADDRESS)
-            const flowRateEffective = flowInfo?.flowRate.add(flowInfoAdmin?.flowRate)
-            // const flowRate = flowInfo?.flowRate.toString()
-            const flowRate = flowRateEffective.toString()
-            /** 
-             * from flowBigNumberInfo all are 
-             * uint256 timestamp,
-             * int96 flowRate,
-             * uint256 deposit,
-             * uint256 owedDeposit
-             */
-            if (flowRate !== "0" && activeRoomData?.caller === localAddress) { // caller
-                await getAvailableSeconds(flowRate)
 
-                setFlowDeposit(flowInfo?.deposit.add(flowInfoAdmin?.deposit).toString())
+            if (effectiveFlowRate !== "0" && effectiveFlowDeposit !== "0" && activeRoomData?.caller === localAddress) { // caller
+                await getAvailableSeconds(effectiveFlowRate)
+
+                setFlowDeposit(effectiveFlowDeposit)
+                setEffectiveFlowRate("0")
+                setEffectiveFlowDeposit("0")
+                setIsCheckFlow(false)
             }
         }
         if (activeRoomData) {
+            setIsCheckFlow(true)
             getInfo()
         }
-    }, [isCreatingFlow, activeRoomData?.flowRate])
+    }, [isCreatingFlow, activeRoomData?.flowRate, effectiveFlowRate, effectiveFlowDeposit])
 
     useUpdateEffect(() => {
         if (activeCallMaxSeconds !== "0" && activeRoomData?.caller === localAddress) {
