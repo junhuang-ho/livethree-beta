@@ -9,7 +9,7 @@ import axios from "axios"
 import { useWeb3Auth } from "./Web3Auth";
 import { useUpdateEffect } from "../hooks/useUpdateEffect";
 
-import { PLACEHOLDER_ADDRESS } from "../constants/constants";
+import { PLACEHOLDER_ADDRESS, CLOUD_FN_URL_GETNONCE, CLOUD_FN_URL_VERIFYSIGNEDMSG } from "../constants/constants";
 
 export interface IFirebaseContext {
     user: any,
@@ -50,6 +50,7 @@ export const FirebaseProvider = ({ children }: IFirebaseProps) => {
 
     useUpdateEffect(() => {
         const signInWithAddress = async (referrerAddress: string) => {
+            console.log("referrerAddress:", referrerAddress)
             setIsLoggingIn(true)
             try {
                 await auth.setPersistence(browserSessionPersistence)
@@ -58,7 +59,7 @@ export const FirebaseProvider = ({ children }: IFirebaseProps) => {
                     address: localAddress,
                     referrerAddress: referrerAddress
                 }
-                const resp1 = await axios.post("https://us-central1-moonlight-173df.cloudfunctions.net/getNonce", data1)
+                const resp1 = await axios.post(CLOUD_FN_URL_GETNONCE, data1)
                 const nonce = resp1.data.nonce
 
                 const signature = await signMessage(`0x${ toHex(nonce) }`)
@@ -67,7 +68,7 @@ export const FirebaseProvider = ({ children }: IFirebaseProps) => {
                     address: localAddress,
                     signature: signature
                 }
-                const resp2 = await axios.post("https://us-central1-moonlight-173df.cloudfunctions.net/verifySignedMessage", data2)
+                const resp2 = await axios.post(CLOUD_FN_URL_VERIFYSIGNEDMSG, data2)
                 const jwtToken = resp2.data.token
 
                 signInWithCustomToken(auth, jwtToken)

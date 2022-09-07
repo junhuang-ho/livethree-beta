@@ -23,6 +23,8 @@ import IConstantFlowAgreementV1 from "./contracts/IConstantFlowAgreementV1.json"
 // // --- dev --- //
 // export const ADMIN_ADDRESS = "0x614539062F7205049917e03ec4C86FF808F083cb"  // dev | NOTE: GCP's moonlight fn
 // export const WEB3AUTH_CLIENT_ID = 'BMdhaBBKwsMr1jS7Z6rikXs_DDHZaFE1S9zIHrUZRA3J5xi-pTvN_LVm7UpeVbKmwxOk3W0T5YtoPKyrZIuWleQ' as const // web3auth's mainnet (standard - not cyan)
+// export const CLOUD_FN_URL_GETNONCE = 'https://us-central1-moonlight-173df.cloudfunctions.net/getNonce'
+// export const CLOUD_FN_URL_VERIFYSIGNEDMSG = 'https://us-central1-moonlight-173df.cloudfunctions.net/verifySignedMessage'
 // export const FIREBASE_CONFIG = {
 //     apiKey: "AIzaSyAJNuAC5aIKrQwtD5nsmYpuo_s71FmnwqI",
 //     authDomain: "moonlight-173df.firebaseapp.com",
@@ -36,6 +38,8 @@ import IConstantFlowAgreementV1 from "./contracts/IConstantFlowAgreementV1.json"
 // --- live --- //
 export const ADMIN_ADDRESS = "0x968B0165Ccb042278d0AC375985943e49892D0B1" // live | NOTE: GCP's livethree fn
 export const WEB3AUTH_CLIENT_ID = 'BCra18FhoqHZBjima6njP0JKotW1lSDCyjdhcyuHpj8WO_0AbQ04_psVRM-5XV9DpUFYGRbct78l5JVN4qvskh0' as const // web3auth's mainnet (not polygon)
+export const CLOUD_FN_URL_GETNONCE = 'https://us-central1-livethree-d1d85.cloudfunctions.net/getNonce'
+export const CLOUD_FN_URL_VERIFYSIGNEDMSG = 'https://us-central1-livethree-d1d85.cloudfunctions.net/verifySignedMessage'
 export const FIREBASE_CONFIG = {
     apiKey: "AIzaSyCKar3WJN-zn11wWPTJX3eIJWgpBz46IaY",
     authDomain: "livethree-d1d85.firebaseapp.com",
