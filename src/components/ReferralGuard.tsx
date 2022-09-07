@@ -51,9 +51,15 @@ const ReferralGuard = ({ children }: { children: JSX.Element }) => {
         }
     }, [params?.address])
 
+
+    useEffect(() => {
+        if ((isProcessed || params?.address === DEFAULT_SIGN_IN_PATH) && (isValidAddress || params?.address === DEFAULT_SIGN_IN_PATH)) {
+            setReferrerAddress(params?.address)
+        }
+    }, [isProcessed, isValidAddress, params?.address])
+
     if (isProcessed || params?.address === DEFAULT_SIGN_IN_PATH) {
         if (isValidAddress || params?.address === DEFAULT_SIGN_IN_PATH) {
-            setReferrerAddress(params?.address)
             return children
         } else {
             return <InvalidReferralPage />

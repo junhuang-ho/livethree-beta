@@ -62,6 +62,11 @@ export default defineConfig({
     //         // process: 'rollup-plugin-node-polyfills/polyfills/process-es6',
     //     }
     // },
+    resolve: {
+        alias: {
+            "@web3auth/web3auth": '@web3auth/web3auth/dist/web3auth.umd.min.js', // for Web3Auth Plug&Play to work // https://github.com/Web3Auth/Web3Auth/discussions/558
+        }
+    },
     optimizeDeps: {
         esbuildOptions: {
             // Node.js global to browser globalThis

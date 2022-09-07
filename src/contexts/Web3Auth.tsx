@@ -71,6 +71,7 @@ interface IWeb3AuthProps {
 
 const MESSAGE_1 = "web3auth not initialized yet"
 const MESSAGE_2 = "wallet not initialized yet"
+const DUMMY = 'dummy'
 
 export const Web3AuthProvider = ({ children }: IWeb3AuthProps) => {
     const [web3auth, setWeb3Auth] = useState<Web3Auth | null>(null)
@@ -108,7 +109,7 @@ export const Web3AuthProvider = ({ children }: IWeb3AuthProps) => {
             setIsLoggingIn(true)
             try {
 
-                const web3auth = new Web3Auth({
+                const web3auth_ = new Web3Auth({
                     clientId: WEB3AUTH_CLIENT_ID,
                     chainConfig: WEB3AUTH_CHAIN_CONFIG[selectedChain],
                     uiConfig: { appLogo: "https://raw.githubusercontent.com/junhuang-ho/miscellaneous/64fc258aefb53d20b6e520aa44c7e5be2bf10b06/l3-t1-crop.svg" },// ref: https://web3auth.io/docs/sdk/web/web3auth/initialize#uiconfig
@@ -116,47 +117,59 @@ export const Web3AuthProvider = ({ children }: IWeb3AuthProps) => {
                     storageKey: 'session'//'local'
                 });
 
-                await web3auth.initModal({
+                await web3auth_.initModal({
                     modalConfig: {
                         [WALLET_ADAPTERS.OPENLOGIN]: {
                             label: "openlogin",
                             loginMethods: {
                                 email_passwordless: {
+                                    name: DUMMY,
                                     showOnModal: false,
                                 },
                             },
                         },
                         [WALLET_ADAPTERS.WALLET_CONNECT_V1]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                         [WALLET_ADAPTERS.WALLET_CONNECT_V2]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                         [WALLET_ADAPTERS.TORUS_SOLANA]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                         [WALLET_ADAPTERS.PHANTOM]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                         [WALLET_ADAPTERS.SOLLET]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                         [WALLET_ADAPTERS.SOLLET_EXTENSION]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                         [WALLET_ADAPTERS.SOLFLARE]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                         [WALLET_ADAPTERS.SLOPE]: {
+                            label: DUMMY,
                             showOnModal: false
                         },
                     },
                 });
 
                 // await web3auth.initModal()
-                setWeb3Auth(web3auth)
+
+
+                setWeb3Auth(web3auth_)
                 setIsLoggingIn(false)
-                setWeb3AuthProvider(await web3auth.connect())
+
+                setWeb3AuthProvider(await web3auth_.connect())
 
                 refreshRPCData()
                 refreshNativeBalance()

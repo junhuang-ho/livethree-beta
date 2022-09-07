@@ -1,9 +1,15 @@
 import { CHAIN_NAMESPACES, CustomChainConfig } from "@web3auth/base";
 
-import ERC20 from "@superfluid-finance/ethereum-contracts/build/contracts/ERC20.json"
-import ISuperToken from "@superfluid-finance/ethereum-contracts/build/contracts/ISuperToken.json"
-import ISuperfluid from "@superfluid-finance/ethereum-contracts/build/contracts/ISuperfluid.json"
-import IConstantFlowAgreementV1 from "@superfluid-finance/ethereum-contracts/build/contracts/IConstantFlowAgreementV1.json"
+// import ERC20 from "@superfluid-finance/ethereum-contracts/build/contracts/ERC20.json"
+// import ISuperToken from "@superfluid-finance/ethereum-contracts/build/contracts/ISuperToken.json"
+// import ISuperfluid from "@superfluid-finance/ethereum-contracts/build/contracts/ISuperfluid.json"
+// import IConstantFlowAgreementV1 from "@superfluid-finance/ethereum-contracts/build/contracts/IConstantFlowAgreementV1.json"
+
+// copied from node_modules
+import ERC20 from "./contracts/ERC20.json"
+import ISuperToken from "./contracts/ISuperToken.json"
+import ISuperfluid from "./contracts/ISuperfluid.json"
+import IConstantFlowAgreementV1 from "./contracts/IConstantFlowAgreementV1.json"
 
 // rules
 // const isMobile = useResponsive('down', 'sm');
@@ -14,31 +20,31 @@ import IConstantFlowAgreementV1 from "@superfluid-finance/ethereum-contracts/bui
 // ----- to switch between dev & live ----- //
 // ---------------------------------------- //
 
-// --- dev --- //
-export const ADMIN_ADDRESS = "0x614539062F7205049917e03ec4C86FF808F083cb"  // dev | NOTE: GCP's moonlight fn
-export const WEB3AUTH_CLIENT_ID = 'BMdhaBBKwsMr1jS7Z6rikXs_DDHZaFE1S9zIHrUZRA3J5xi-pTvN_LVm7UpeVbKmwxOk3W0T5YtoPKyrZIuWleQ' as const // web3auth's mainnet (standard - not cyan)
-export const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyAJNuAC5aIKrQwtD5nsmYpuo_s71FmnwqI",
-    authDomain: "moonlight-173df.firebaseapp.com",
-    projectId: "moonlight-173df",
-    storageBucket: "moonlight-173df.appspot.com",
-    messagingSenderId: "903972858647",
-    appId: "1:903972858647:web:d99caaa732f9a12d00e552",
-    measurementId: "G-WTWTRSZYTB"
-};
-
-// // --- live --- //
-// export const ADMIN_ADDRESS = "0x968B0165Ccb042278d0AC375985943e49892D0B1" // live | NOTE: GCP's livethree fn
-// export const WEB3AUTH_CLIENT_ID = 'BCra18FhoqHZBjima6njP0JKotW1lSDCyjdhcyuHpj8WO_0AbQ04_psVRM-5XV9DpUFYGRbct78l5JVN4qvskh0' as const // web3auth's mainnet (not polygon)
+// // --- dev --- //
+// export const ADMIN_ADDRESS = "0x614539062F7205049917e03ec4C86FF808F083cb"  // dev | NOTE: GCP's moonlight fn
+// export const WEB3AUTH_CLIENT_ID = 'BMdhaBBKwsMr1jS7Z6rikXs_DDHZaFE1S9zIHrUZRA3J5xi-pTvN_LVm7UpeVbKmwxOk3W0T5YtoPKyrZIuWleQ' as const // web3auth's mainnet (standard - not cyan)
 // export const FIREBASE_CONFIG = {
-//     apiKey: "AIzaSyCKar3WJN-zn11wWPTJX3eIJWgpBz46IaY",
-//     authDomain: "livethree-d1d85.firebaseapp.com",
-//     projectId: "livethree-d1d85",
-//     storageBucket: "livethree-d1d85.appspot.com",
-//     messagingSenderId: "106255450520",
-//     appId: "1:106255450520:web:ccf7dbfb53533516662bed",
-//     measurementId: "G-Y9Y57JJRPL"
+//     apiKey: "AIzaSyAJNuAC5aIKrQwtD5nsmYpuo_s71FmnwqI",
+//     authDomain: "moonlight-173df.firebaseapp.com",
+//     projectId: "moonlight-173df",
+//     storageBucket: "moonlight-173df.appspot.com",
+//     messagingSenderId: "903972858647",
+//     appId: "1:903972858647:web:d99caaa732f9a12d00e552",
+//     measurementId: "G-WTWTRSZYTB"
 // };
+
+// --- live --- //
+export const ADMIN_ADDRESS = "0x968B0165Ccb042278d0AC375985943e49892D0B1" // live | NOTE: GCP's livethree fn
+export const WEB3AUTH_CLIENT_ID = 'BCra18FhoqHZBjima6njP0JKotW1lSDCyjdhcyuHpj8WO_0AbQ04_psVRM-5XV9DpUFYGRbct78l5JVN4qvskh0' as const // web3auth's mainnet (not polygon)
+export const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyCKar3WJN-zn11wWPTJX3eIJWgpBz46IaY",
+    authDomain: "livethree-d1d85.firebaseapp.com",
+    projectId: "livethree-d1d85",
+    storageBucket: "livethree-d1d85.appspot.com",
+    messagingSenderId: "106255450520",
+    appId: "1:106255450520:web:ccf7dbfb53533516662bed",
+    measurementId: "G-Y9Y57JJRPL"
+};
 
 // ---------------------------------------- //
 
