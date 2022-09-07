@@ -116,9 +116,16 @@ export const DialogPreCallDetails = ({ open, setOpen, deposit, restartTimer, add
                         </DialogContentText>
                         <DialogContentText align="justify" sx={ { display: 'list-item' } }>
                             <Box component="span" fontWeight='fontWeightMedium' display='inline'>If you are using an external wallet</Box>,
-                            you must confirm the transaction to end the call after
-                            the video call ends (for both manual or auto call end)
+                            you must confirm the transaction to start/end the call before/after
+                            the video call starts/ends
                         </DialogContentText>
+                        <Tooltip title={ `Even for "auto end call" by LiveThree, external wallet users would still need to confirm the transaction.` }>
+                            <Avatar
+                                sx={ { bgcolor: theme.palette.secondary.main, width: 16, height: 16, ml: 1 } }
+                            >
+                                <InfoIcon sx={ { width: "80%", height: "80%" } } />
+                            </Avatar>
+                        </Tooltip>
                     </Box>
                 }
 

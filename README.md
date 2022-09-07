@@ -34,7 +34,7 @@ firebase hosting:channel:deploy upgrade6 --only livethree-d1d85 --expires 1d
 
 firebase hosting:clone livethree-d1d85:upgrade5 livethree-d1d85:live
 ------------
-firebase hosting:channel:deploy test3 --only livethree-d1d85 --expires 1d
+firebase hosting:channel:deploy test7 --only livethree-d1d85 --expires 1d
 ------------
 
 localhost will run .env.development secrets [yarn start]
